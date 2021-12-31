@@ -6,7 +6,7 @@ public partial class Place
 {
     /// <summary>An array containing the separate components applicable to this address.</summary>
     [Newtonsoft.Json.JsonProperty("address_components", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<AddressComponent> Address_components { get; set; }
+    public ICollection<AddressComponent> Address_components { get; set; }
 
     /// <summary>A representation of the place's address in the [adr microformat](http://microformats.org/wiki/adr).</summary>
     [Newtonsoft.Json.JsonProperty("adr_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -67,7 +67,7 @@ public partial class Place
 
     /// <summary>An array of photo objects, each containing a reference to an image. A request may return up to ten photos. More information about place photos and how you can use the images in your application can be found in the [Place Photos](https://developers.google.com/maps/documentation/places/web-service/photos) documentation.</summary>
     [Newtonsoft.Json.JsonProperty("photos", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<PlacePhoto> Photos { get; set; }
+    public ICollection<PlacePhoto> Photos { get; set; }
 
     /// <summary>A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the `place_id` field of a Places API request. For more information about place IDs, see the [place ID overview](https://developers.google.com/maps/documentation/places/web-service/place-id).</summary>
     [Newtonsoft.Json.JsonProperty("place_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -98,7 +98,7 @@ public partial class Place
 
     /// <summary>A JSON array of up to five reviews. If a language parameter was specified in the request, the service will bias the results to prefer reviews written in that language.</summary>
     [Newtonsoft.Json.JsonProperty("reviews", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<PlaceReview> Reviews { get; set; }
+    public ICollection<PlaceReview> Reviews { get; set; }
 
     /// <summary>Deprecated.</summary>
     [Newtonsoft.Json.JsonProperty("scope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -106,7 +106,7 @@ public partial class Place
 
     /// <summary>Contains an array of feature types describing the given result. See the list of [supported types](https://developers.google.com/maps/documentation/places/web-service/supported_types#table2).</summary>
     [Newtonsoft.Json.JsonProperty("types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<string> Types { get; set; }
+    public ICollection<string> Types { get; set; }
 
     /// <summary>Contains the URL of the official Google page for this place. This will be the Google-owned page that contains the best available information about the place. Applications must link to or embed this page on any screen that shows detailed results about the place to the user.</summary>
     [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -133,10 +133,10 @@ public partial class Place
     [Newtonsoft.Json.JsonProperty("website", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
     public string Website { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

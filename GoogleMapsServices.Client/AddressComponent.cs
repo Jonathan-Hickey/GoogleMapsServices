@@ -16,12 +16,12 @@ public partial class AddressComponent
     /// <summary>An array indicating the type of the address component. See the list of [supported types](https://developers.google.com/maps/documentation/places/web-service/supported_types).</summary>
     [Newtonsoft.Json.JsonProperty("types", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<string> Types { get; set; } = new System.Collections.ObjectModel.Collection<string>();
+    public ICollection<string> Types { get; set; } = new System.Collections.ObjectModel.Collection<string>();
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

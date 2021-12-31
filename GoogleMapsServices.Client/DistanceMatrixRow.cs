@@ -11,12 +11,12 @@ public partial class DistanceMatrixRow
     /// </summary>
     [Newtonsoft.Json.JsonProperty("elements", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<DistanceMatrixElement> Elements { get; set; } = new System.Collections.ObjectModel.Collection<DistanceMatrixElement>();
+    public ICollection<DistanceMatrixElement> Elements { get; set; } = new System.Collections.ObjectModel.Collection<DistanceMatrixElement>();
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

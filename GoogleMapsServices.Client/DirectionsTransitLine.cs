@@ -6,7 +6,7 @@ public partial class DirectionsTransitLine
     /// <summary>The transit agency (or agencies) that operates this transit line.</summary>
     [Newtonsoft.Json.JsonProperty("agencies", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<DirectionsTransitAgency> Agencies { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsTransitAgency>();
+    public ICollection<DirectionsTransitAgency> Agencies { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsTransitAgency>();
 
     /// <summary>The color commonly used in signage for this line.</summary>
     [Newtonsoft.Json.JsonProperty("color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -37,10 +37,10 @@ public partial class DirectionsTransitLine
     [Newtonsoft.Json.JsonProperty("vehicle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
     public DirectionsTransitVehicle Vehicle { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

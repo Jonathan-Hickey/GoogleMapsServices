@@ -8,7 +8,7 @@ public partial class PlacesFindPlaceFromTextResponse
     /// </summary>
     [Newtonsoft.Json.JsonProperty("candidates", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<Place> Candidates { get; set; } = new System.Collections.ObjectModel.Collection<Place>();
+    public ICollection<Place> Candidates { get; set; } = new System.Collections.ObjectModel.Collection<Place>();
 
     /// <summary>Contains the status of the request, and may contain debugging information to help you track down why the request failed.</summary>
     [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
@@ -24,12 +24,12 @@ public partial class PlacesFindPlaceFromTextResponse
     /// <summary>When the service returns additional information about the request specification, there may be an additional `info_messages` field within the response object. This field is only returned for successful requests. It may not always be returned, and its content is subject to change.
     /// </summary>
     [Newtonsoft.Json.JsonProperty("info_messages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<string> Info_messages { get; set; }
+    public ICollection<string> Info_messages { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

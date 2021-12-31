@@ -11,7 +11,7 @@ public partial class PlaceAutocompletePrediction
     /// <summary>A list of substrings that describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.</summary>
     [Newtonsoft.Json.JsonProperty("matched_substrings", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<PlaceAutocompleteMatchedSubstring> Matched_substrings { get; set; } = new System.Collections.ObjectModel.Collection<PlaceAutocompleteMatchedSubstring>();
+    public ICollection<PlaceAutocompleteMatchedSubstring> Matched_substrings { get; set; } = new System.Collections.ObjectModel.Collection<PlaceAutocompleteMatchedSubstring>();
 
     /// <summary>A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeId field of a Places API request. For more information about place IDs, see the [Place IDs](https://developers.google.com/maps/documentation/places/web-service/place-id) overview.</summary>
     [Newtonsoft.Json.JsonProperty("place_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -29,17 +29,17 @@ public partial class PlaceAutocompletePrediction
     /// <summary>Contains an array of terms identifying each section of the returned description (a section of the description is generally terminated with a comma). Each entry in the array has a `value` field, containing the text of the term, and an `offset` field, defining the start position of this term in the description, measured in Unicode characters.</summary>
     [Newtonsoft.Json.JsonProperty("terms", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<PlaceAutocompleteTerm> Terms { get; set; } = new System.Collections.ObjectModel.Collection<PlaceAutocompleteTerm>();
+    public ICollection<PlaceAutocompleteTerm> Terms { get; set; } = new System.Collections.ObjectModel.Collection<PlaceAutocompleteTerm>();
 
     /// <summary>Contains an array of types that apply to this place. For example: `[ "political", "locality" ]` or `[ "establishment", "geocode", "beauty_salon" ]`. The array can contain multiple values. Learn more about [Place types](https://developers.google.com/maps/documentation/places/web-service/supported_types).
     /// </summary>
     [Newtonsoft.Json.JsonProperty("types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<string> Types { get; set; }
+    public ICollection<string> Types { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

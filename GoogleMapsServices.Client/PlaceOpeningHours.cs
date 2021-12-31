@@ -11,16 +11,16 @@ public partial class PlaceOpeningHours
     /// <summary>An array of opening periods covering seven days, starting from Sunday, in chronological order.
     /// </summary>
     [Newtonsoft.Json.JsonProperty("periods", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<PlaceOpeningHoursPeriod> Periods { get; set; }
+    public ICollection<PlaceOpeningHoursPeriod> Periods { get; set; }
 
     /// <summary>An array of strings describing in human-readable text the hours of the place.</summary>
     [Newtonsoft.Json.JsonProperty("weekday_text", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<string> Weekday_text { get; set; }
+    public ICollection<string> Weekday_text { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

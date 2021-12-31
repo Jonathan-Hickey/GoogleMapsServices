@@ -52,22 +52,22 @@ public partial class DirectionsLeg
     /// <summary>An array of steps denoting information about each separate step of the leg of the journey.</summary>
     [Newtonsoft.Json.JsonProperty("steps", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<DirectionsStep> Steps { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsStep>();
+    public ICollection<DirectionsStep> Steps { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsStep>();
 
     /// <summary>Information about traffic speed along the leg.</summary>
     [Newtonsoft.Json.JsonProperty("traffic_speed_entry", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<DirectionsTrafficSpeedEntry> Traffic_speed_entry { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsTrafficSpeedEntry>();
+    public ICollection<DirectionsTrafficSpeedEntry> Traffic_speed_entry { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsTrafficSpeedEntry>();
 
     /// <summary>The locations of via waypoints along this leg.</summary>
     [Newtonsoft.Json.JsonProperty("via_waypoint", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<DirectionsViaWaypoint> Via_waypoint { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsViaWaypoint>();
+    public ICollection<DirectionsViaWaypoint> Via_waypoint { get; set; } = new System.Collections.ObjectModel.Collection<DirectionsViaWaypoint>();
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

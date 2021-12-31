@@ -26,16 +26,16 @@ public partial class GeolocationRequest
 
     /// <summary>The request body's cellTowers array contains zero or more cell tower objects.</summary>
     [Newtonsoft.Json.JsonProperty("cellTowers", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<CellTower> CellTowers { get; set; }
+    public ICollection<CellTower> CellTowers { get; set; }
 
     /// <summary>An array of two or more WiFi access point objects.</summary>
     [Newtonsoft.Json.JsonProperty("wifiAccessPoints", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-    public System.Collections.Generic.ICollection<WiFiAccessPoint> WifiAccessPoints { get; set; }
+    public ICollection<WiFiAccessPoint> WifiAccessPoints { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }

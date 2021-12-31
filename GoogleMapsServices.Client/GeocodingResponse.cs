@@ -10,7 +10,7 @@ public partial class GeocodingResponse
 
     [Newtonsoft.Json.JsonProperty("results", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required]
-    public System.Collections.Generic.ICollection<GeocodingResult> Results { get; set; } = new System.Collections.ObjectModel.Collection<GeocodingResult>();
+    public ICollection<GeocodingResult> Results { get; set; } = new System.Collections.ObjectModel.Collection<GeocodingResult>();
 
     [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
     [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -21,10 +21,10 @@ public partial class GeocodingResponse
     [Newtonsoft.Json.JsonProperty("error_message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
     public string Error_message { get; set; }
 
-    private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
 
     [Newtonsoft.Json.JsonExtensionData]
-    public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+    public IDictionary<string, object> AdditionalProperties
     {
         get { return _additionalProperties; }
         set { _additionalProperties = value; }
