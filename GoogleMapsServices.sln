@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsServices.SimulatorApi", "test\GoogleMapsServices.SimulatorApi\GoogleMapsServices.SimulatorApi.csproj", "{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AD426888-115F-4C20-B31B-AC3ABD38EAF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{15B595D7-BD56-402C-9249-86D83C4D79AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsServices.Client", "GoogleMapsServices.Client\GoogleMapsServices.Client.csproj", "{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsServices.Client.Tests", "GoogleMapsServices.Client.Tests\GoogleMapsServices.Client.Tests.csproj", "{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC5C7509-5C8F-4135-98D9-A8D54A89BBBA} = {AD426888-115F-4C20-B31B-AC3ABD38EAF3}
+		{6202CA6B-AF2E-47E1-B4A3-0291E84E788E} = {15B595D7-BD56-402C-9249-86D83C4D79AD}
+		{42A272AF-22AB-4DCF-9240-5A5A1191B2A2} = {AD426888-115F-4C20-B31B-AC3ABD38EAF3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA34EAE5-90B6-49A8-876C-F845C57CBA3E}
+	EndGlobalSection
+EndGlobal
