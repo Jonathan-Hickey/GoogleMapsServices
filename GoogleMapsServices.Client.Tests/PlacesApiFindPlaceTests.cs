@@ -2,10 +2,10 @@ using Xunit;
 
 namespace GoogleMapsServices.Client.Tests
 {
-    public class UnitTest1
+    public class PlacesApiFindPlaceTests
     {
         [Fact]
-        public void Test1()
+        public void Given_When_Then()
         {
 
         }

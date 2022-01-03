@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="O9d.Json.Formatting" Version="0.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj" />
   </ItemGroup>
 
 </Project>

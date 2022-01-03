@@ -1,25 +1,11 @@
 ﻿namespace GoogleMapsServices.Client;
 
-/// <summary>An object describing a specific location with Latitude and Longitude in decimal degrees.</summary>
-[System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.22.0 (Newtonsoft.Json v11.0.0.0)")]
-public partial class LatLngLiteral
+/// <summary>
+/// An object describing a specific location with Latitude and Longitude in decimal degrees.
+/// </summary>
+public sealed class LatLngLiteral
 {
-    /// <summary>Latitude in decimal degrees</summary>
-    [Newtonsoft.Json.JsonProperty("lat", Required = Newtonsoft.Json.Required.Always)]
-    public double Lat { get; set; }
+    public decimal Lat { get; set; }
 
-    /// <summary>Longitude in decimal degrees</summary>
-    [Newtonsoft.Json.JsonProperty("lng", Required = Newtonsoft.Json.Required.Always)]
-    public double Lng { get; set; }
-
-    private IDictionary<string, object> _additionalProperties = new Dictionary<string, object>();
-
-    [Newtonsoft.Json.JsonExtensionData]
-    public IDictionary<string, object> AdditionalProperties
-    {
-        get { return _additionalProperties; }
-        set { _additionalProperties = value; }
-    }
-
-
+    public decimal Lng { get; set; }
 }
