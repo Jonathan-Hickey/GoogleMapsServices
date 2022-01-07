@@ -15,4 +15,7 @@
     <ProjectReference Include="..\..\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="GoogleMapsServices.Client.Tests" />
+	</ItemGroup>
 </Project>

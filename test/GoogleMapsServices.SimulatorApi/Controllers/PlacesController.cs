@@ -14,7 +14,7 @@ namespace GoogleMapsServices.SimulatorApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "findplacefromtext/json")]
+        [HttpGet("findplacefromtext/json", Name = "Find Place")]
         public ActionResult FindPlace()
         {
             var response = new PlacesFindPlaceFromTextResponse
