@@ -1,4 +1,5 @@
 ﻿using System;
+using GoogleMapsServices.Client.Serialization.SystemTextJson;
 using Microsoft.Extensions.Options;
 
 namespace GoogleMapsServices.Client.Tests.Infrastructure
@@ -17,7 +18,7 @@ namespace GoogleMapsServices.Client.Tests.Infrastructure
             _placesApiClient = new PlacesApiClient(placesApiHttpClient, new GoogleClientOptions
             {
                 BaseUrl = placesApiHttpClient.BaseAddress.AbsoluteUri,
-            });
+            }, new JsonSerialization());
         }
 
         public PlacesApiClient GetPlacesApiClient()

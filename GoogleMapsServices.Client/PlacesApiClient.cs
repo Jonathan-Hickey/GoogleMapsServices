@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.Serialization;
+using GoogleMapsServices.Client.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleMapsServices.Client
@@ -15,28 +16,16 @@ namespace GoogleMapsServices.Client
     {
         private readonly HttpClient _httpClient;
         private readonly GoogleClientOptions _googleClientOptions;
-
-        private Lazy<JsonSerializerSettings> _settings;
+        
         private readonly string _baseUrl;
-        protected JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-        public PlacesApiClient(HttpClient httpClient, GoogleClientOptions googleClientOptions)
+        private readonly IJsonSerialization _jsonSerialization;
+
+        public PlacesApiClient(HttpClient httpClient, GoogleClientOptions googleClientOptions, IJsonSerialization jsonSerialization)
         {
+            _jsonSerialization = jsonSerialization;
             _httpClient = httpClient;
             _googleClientOptions = googleClientOptions;
             _baseUrl = _googleClientOptions.BaseUrl;
-
-            _settings = new Lazy<JsonSerializerSettings>(() =>
-            {
-                var settings = new JsonSerializerSettings();
-                UpdateJsonSerializerSettings(settings);
-                return settings;
-            });
-        }
-
-
-        private void UpdateJsonSerializerSettings(JsonSerializerSettings settings)
-        {
-
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -578,7 +567,7 @@ namespace GoogleMapsServices.Client
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    var typedBody = JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    var typedBody = _jsonSerialization.DeserializeFromSnakeCase<T>(responseText);
                     return new ObjectResponseResult<T>(typedBody, responseText);
                 }
                 catch (JsonException exception)
@@ -592,11 +581,8 @@ namespace GoogleMapsServices.Client
                 try
                 {
                     using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    using (var streamReader = new StreamReader(responseStream))
-                    using (var jsonTextReader = new JsonTextReader(streamReader))
                     {
-                        var serializer = JsonSerializer.Create(JsonSerializerSettings);
-                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        var typedBody = await _jsonSerialization.DeserializeFromSnakeCase<T>(responseStream);
                         return new ObjectResponseResult<T>(typedBody, string.Empty);
                     }
                 }
@@ -612,13 +598,13 @@ namespace GoogleMapsServices.Client
 
         protected struct ObjectResponseResult<T>
         {
-            public ObjectResponseResult(T responseObject, string responseText)
+            public ObjectResponseResult(T? responseObject, string responseText)
             {
                 Object = responseObject;
                 Text = responseText;
             }
 
-            public T Object { get; }
+            public T? Object { get; }
 
             public string Text { get; }
         }

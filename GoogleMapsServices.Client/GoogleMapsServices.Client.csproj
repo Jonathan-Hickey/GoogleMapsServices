@@ -18,4 +18,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\src\GoogleMapsServices.Client.Serialization\GoogleMapsServices.Client.Serialization.csproj" />
+  </ItemGroup>
+
 </Project>

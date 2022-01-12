@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj" />
+    <ProjectReference Include="..\src\GoogleMapsServices.Client.Serialization.SystemTextJson\GoogleMapsServices.Client.Serialization.SystemTextJson.csproj" />
+    <ProjectReference Include="..\src\GoogleMapsServices.Client.Serialization\GoogleMapsServices.Client.Serialization.csproj" />
     <ProjectReference Include="..\test\GoogleMapsServices.SimulatorApi\GoogleMapsServices.SimulatorApi.csproj" />
   </ItemGroup>
 
