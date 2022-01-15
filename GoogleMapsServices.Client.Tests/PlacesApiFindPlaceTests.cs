@@ -22,13 +22,13 @@ namespace GoogleMapsServices.Client.Tests
         {
             var placesApiClient =_googleApiFixture.GetPlacesApiClient();
             
-            var fields = new List<string>()
+            var fields = new List<Field>()
             {
-                "formatted_address",
-                "name",
-                "rating",
-                "opening_hours",
-                "geometry"
+                Fields.FormattedAddress,
+                Fields.Name,
+                Fields.Rating,
+                Fields.OpeningHours,
+                Fields.Geometry,
             };
 
             var input = "Museum of Contemporary Art Australia";

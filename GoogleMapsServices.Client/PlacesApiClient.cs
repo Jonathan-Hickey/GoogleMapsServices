@@ -62,7 +62,7 @@ namespace GoogleMapsServices.Client
         /// * The preferred language has a small influence on the set of results that the API chooses to return, and the order in which they are returned. The geocoder interprets abbreviations differently depending on language, such as the abbreviations for street types, or synonyms that may be valid in one language but not in another. For example, _utca_ and _tér_ are synonyms for street in Hungarian.</param>
         /// <returns>200 OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async Task<PlacesFindPlaceFromTextResponse> FindPlaceFromTextAsync(IEnumerable<string> fields, string input, Inputtype inputType, string locationBias, Language? language, CancellationToken cancellationToken)
+        public async Task<PlacesFindPlaceFromTextResponse> FindPlaceFromTextAsync(IEnumerable<Field> fields, string input, Inputtype inputType, string locationBias, Language? language, CancellationToken cancellationToken)
         {
             if (input == null)
                 throw new ArgumentNullException("input");
