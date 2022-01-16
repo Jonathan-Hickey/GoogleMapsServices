@@ -24,11 +24,11 @@ namespace GoogleMapsServices.Client.Tests
             
             var fields = new List<Field>()
             {
-                Fields.FormattedAddress,
-                Fields.Name,
-                Fields.Rating,
-                Fields.OpeningHours,
-                Fields.Geometry,
+                Field.Basic.FormattedAddress,
+                Field.Basic.Name,
+                Field.Atmosphere.Rating,
+                Field.Contact.OpeningHours,
+                Field.Basic.Geometry,
             };
 
             var input = "Museum of Contemporary Art Australia";
