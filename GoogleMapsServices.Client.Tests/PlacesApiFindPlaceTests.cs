@@ -33,7 +33,7 @@ namespace GoogleMapsServices.Client.Tests
 
             var input = "Museum of Contemporary Art Australia";
 
-            var result = await placesApiClient.FindPlaceFromTextAsync(fields, input,Inputtype.Textquery, null, Language.EnGB, CancellationToken.None);
+            var result = await placesApiClient.FindPlaceFromTextAsync(fields, input, Inputtype.Textquery, null, Language.EnglishGreatBritain, CancellationToken.None);
 
             result.Status.Should().Be(PlacesSearchStatus.OK);
         }

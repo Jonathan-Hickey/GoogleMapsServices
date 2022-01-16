@@ -85,11 +85,11 @@ namespace GoogleMapsServices.Client
             urlBuilder_.Append(Uri.EscapeDataString("inputtype") + "=").Append(Uri.EscapeDataString(ConvertToString(inputType, CultureInfo.InvariantCulture))).Append("&");
             if (locationBias != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("locationbias") + "=").Append(Uri.EscapeDataString(ConvertToString(locationBias, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("locationbias=").Append(Uri.EscapeDataString(ConvertToString(locationBias, CultureInfo.InvariantCulture))).Append("&");
             }
             if (language != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("language") + "=").Append(Uri.EscapeDataString(ConvertToString(language, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("language=").Append(language.LanguageCodeEscapeDataString()).Append("&");
             }
             urlBuilder_.Length--;
 
