@@ -72,10 +72,15 @@ namespace GoogleMapsServices.Client
 
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(_baseUrl != null ? _baseUrl.TrimEnd('/') : "").Append("/maps/api/place/findplacefromtext/json?");
+            
             if (fields != null)
             {
-                foreach (var item_ in fields) { urlBuilder_.Append(Uri.EscapeDataString("fields") + "=").Append(Uri.EscapeDataString(ConvertToString(item_, CultureInfo.InvariantCulture))).Append("&"); }
+                foreach (var field in fields)
+                {
+                    urlBuilder_.Append("fields=").Append(field.GetUriEscapedValue()).Append("&");
+                }
             }
+
             urlBuilder_.Append(Uri.EscapeDataString("input") + "=").Append(Uri.EscapeDataString(ConvertToString(input, CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Append(Uri.EscapeDataString("inputtype") + "=").Append(Uri.EscapeDataString(ConvertToString(inputType, CultureInfo.InvariantCulture))).Append("&");
             if (locationBias != null)

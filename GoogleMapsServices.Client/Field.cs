@@ -49,17 +49,25 @@
         };
 
         private readonly string _field;
+        private readonly string _uriEscapeDataString;
 
         public Field(string field)
         {
             _field = field;
+
+            _uriEscapeDataString = Uri.EscapeDataString(_field);
         }
 
         public string Value()
         {
             return _field;
         }
-        
+
+        public string GetUriEscapedValue()
+        {
+            return _uriEscapeDataString;
+        }
+
         public override int GetHashCode()
         {
             return _field.GetHashCode();
@@ -82,7 +90,7 @@
 
         public override string ToString()
         {
-            return _field;
+            return _uriEscapeDataString;
         }
 
         public static Field? Parse(string? input)
