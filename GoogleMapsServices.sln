@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AD426888-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{15B595D7-BD56-402C-9249-86D83C4D79AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleMapsServices.Client", "GoogleMapsServices.Client\GoogleMapsServices.Client.csproj", "{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleMapsServices.Client", "src\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj", "{6202CA6B-AF2E-47E1-B4A3-0291E84E788E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleMapsServices.Client.Tests", "GoogleMapsServices.Client.Tests\GoogleMapsServices.Client.Tests.csproj", "{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleMapsServices.Client.Tests", "test\GoogleMapsServices.Client.Tests\GoogleMapsServices.Client.Tests.csproj", "{42A272AF-22AB-4DCF-9240-5A5A1191B2A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMapsServices.Client.Serialization", "src\GoogleMapsServices.Client.Serialization\GoogleMapsServices.Client.Serialization.csproj", "{3F28C84D-40A3-4B67-8700-6611B045F606}"
 EndProject
