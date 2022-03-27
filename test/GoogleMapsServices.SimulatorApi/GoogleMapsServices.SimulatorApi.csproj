@@ -11,11 +11,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<InternalsVisibleTo Include="GoogleMapsServices.Client.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\GoogleMapsServices.Client\GoogleMapsServices.Client.csproj" />
 	</ItemGroup>
 </Project>

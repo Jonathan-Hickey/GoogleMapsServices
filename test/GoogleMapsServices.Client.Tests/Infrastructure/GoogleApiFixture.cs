@@ -1,29 +1,49 @@
 ﻿using System;
+using System.IO;
+using System.Net.Http;
+using GoogleMapsServices.Client.DependencyInjection;
+using GoogleMapsServices.Client.Serialization;
 using GoogleMapsServices.Client.Serialization.SystemTextJson;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Moq;
 
 namespace GoogleMapsServices.Client.Tests.Infrastructure
 {
     public class GoogleApiFixture : IDisposable
     {
         private readonly GoogleApiSimulator _googleApiSimulator;
-        private readonly PlacesApiClient _placesApiClient;
+        private readonly ServiceProvider _serviceProvider;
 
         public GoogleApiFixture()
         {
             _googleApiSimulator = new GoogleApiSimulator();
-            //_googleApiSimulator.Server.BaseAddress = new Uri("https://localhost/");
+
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("settings.json", optional: false)
+                .Build();
+
+            var mockHttpClientFactory = new Mock<IHttpClientFactory>();
+
             var placesApiHttpClient = _googleApiSimulator.CreateClient();
 
-            _placesApiClient = new PlacesApiClient(placesApiHttpClient, new GoogleClientOptions
-            {
-                BaseUrl = placesApiHttpClient.BaseAddress.AbsoluteUri,
-            }, new JsonSerialization());
+            mockHttpClientFactory.Setup(x => x.CreateClient("PlacesApi"))
+                .Returns(placesApiHttpClient);
+
+
+            _serviceProvider = new ServiceCollection()
+                .AddGoogleMapsServices(configuration)
+                .RemoveAll<IHttpClientFactory>()
+                .AddSingleton<IJsonSerialization, JsonSerialization>()
+                .AddSingleton<IHttpClientFactory>(c => mockHttpClientFactory.Object )
+                .BuildServiceProvider();
         }
 
-        public PlacesApiClient GetPlacesApiClient()
+        public IPlacesApiClient GetPlacesApiClient()
         {
-            return _placesApiClient;
+            return _serviceProvider.GetRequiredService<IPlacesApiClient>();
         }
 
         public void Dispose()
