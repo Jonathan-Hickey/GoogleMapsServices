@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Runtime.Serialization;
 using GoogleMapsServices.Client.Serialization;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ namespace GoogleMapsServices.Client
         
         private string _baseUrl;
         private readonly IJsonSerialization _jsonSerialization;
+        private readonly MediaTypeWithQualityHeaderValue _applicationJson = MediaTypeWithQualityHeaderValue.Parse(MediaTypeNames.Application.Json);
 
         public PlacesApiClient(IHttpClientFactory httpClientFactory, IOptionsMonitor<GoogleClientOptions> googleClientOptions, IJsonSerialization jsonSerialization)
         {
@@ -31,7 +33,7 @@ namespace GoogleMapsServices.Client
 
         public async Task<PlacesFindPlaceFromTextResponse> FindPlaceFromTextAsync(IEnumerable<Field> fields, string input, Inputtype inputType, string locationBias, Language? language, CancellationToken cancellationToken)
         {
-            if (input == null)
+            if (string.IsNullOrEmpty(input))
                 throw new ArgumentNullException("input");
 
             if (inputType == null)
@@ -48,11 +50,11 @@ namespace GoogleMapsServices.Client
                 }
             }
 
-            urlBuilder_.Append(Uri.EscapeDataString("input") + "=").Append(Uri.EscapeDataString(ConvertToString(input, CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Append(Uri.EscapeDataString("inputtype") + "=").Append(Uri.EscapeDataString(ConvertToString(inputType, CultureInfo.InvariantCulture))).Append("&");
-            if (locationBias != null)
+            urlBuilder_.Append("input=").Append(input).Append("&");
+            urlBuilder_.Append("inputtype=").Append(Uri.EscapeDataString(ConvertToString(inputType, CultureInfo.InvariantCulture))).Append("&");
+            if (string.IsNullOrEmpty(locationBias))
             {
-                urlBuilder_.Append("locationbias=").Append(Uri.EscapeDataString(ConvertToString(locationBias, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("locationbias=").Append(locationBias).Append("&");
             }
             if (language != null)
             {
@@ -66,12 +68,10 @@ namespace GoogleMapsServices.Client
                 using (var request_ = new HttpRequestMessage())
                 {
                     request_.Method = HttpMethod.Get;
-                    request_.Headers.Accept.Add( MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add( _applicationJson);
 
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
 
                     var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
@@ -82,8 +82,6 @@ namespace GoogleMapsServices.Client
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
-                        ProcessResponse(client_, response_);
 
                         var status_ = response_.StatusCode;
                         if (status_ == HttpStatusCode.OK)
@@ -126,96 +124,87 @@ namespace GoogleMapsServices.Client
             urlBuilder_.Append(_baseUrl != null ? _baseUrl.TrimEnd('/') : "").Append("/maps/api/place/nearbysearch/json?");
             if (keyword != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("keyword") + "=").Append(Uri.EscapeDataString(ConvertToString(keyword, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("keyword=").Append(keyword).Append("&");
             }
-            urlBuilder_.Append(Uri.EscapeDataString("location") + "=").Append(Uri.EscapeDataString(ConvertToString(location, CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Append("location=").Append(location).Append("&");
             if (maxprice != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("maxPrice") + "=").Append(Uri.EscapeDataString(ConvertToString(maxprice, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("maxPrice=").Append(Uri.EscapeDataString(ConvertToString(maxprice, CultureInfo.InvariantCulture))).Append("&");
             }
             if (minprice != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("minPrice") + "=").Append(Uri.EscapeDataString(ConvertToString(minprice, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("minPrice=").Append(Uri.EscapeDataString(ConvertToString(minprice, CultureInfo.InvariantCulture))).Append("&");
             }
-            if (name != null)
+            if (string.IsNullOrEmpty(name))
             {
-                urlBuilder_.Append(Uri.EscapeDataString("name") + "=").Append(Uri.EscapeDataString(ConvertToString(name, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("name=").Append(name).Append("&");
             }
             if (opennow != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("opennow") + "=").Append(Uri.EscapeDataString(ConvertToString(opennow, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("opennow=").Append(Uri.EscapeDataString(ConvertToString(opennow, CultureInfo.InvariantCulture))).Append("&");
             }
             if (pagetoken != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("pageToken") + "=").Append(Uri.EscapeDataString(ConvertToString(pagetoken, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("pageToken=").Append(pagetoken).Append("&");
             }
             if (rankby != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("rankby") + "=").Append(Uri.EscapeDataString(ConvertToString(rankby, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("rankby=").Append(Uri.EscapeDataString(ConvertToString(rankby, CultureInfo.InvariantCulture))).Append("&");
             }
             if (radius != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("radius") + "=").Append(Uri.EscapeDataString(ConvertToString(radius, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("radius=").Append(Uri.EscapeDataString(ConvertToString(radius, CultureInfo.InvariantCulture))).Append("&");
             }
             if (type != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("type") + "=").Append(Uri.EscapeDataString(ConvertToString(type, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("type=").Append(type).Append("&");
             }
             if (language != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("language") + "=").Append(Uri.EscapeDataString(ConvertToString(language, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("language=").Append(Uri.EscapeDataString(ConvertToString(language, CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClientFactory.CreateClient(HttpClientName.PlacesApi);
-            try
+
+            using (var request_ = new HttpRequestMessage())
             {
-                using (var request_ = new HttpRequestMessage())
+                request_.Method = HttpMethod.Get;
+                request_.Headers.Accept.Add(_applicationJson);
+
+                var url_ = urlBuilder_.ToString();
+                request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+
+                var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                try
                 {
-                    request_.Method = new HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
+                    var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                    if (response_.Content != null && response_.Content.Headers != null)
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<PlacesNearbySearchResponse>(response_, headers_).ConfigureAwait(false);
-                            return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-
-                        return default(PlacesNearbySearchResponse);
+                        foreach (var item_ in response_.Content.Headers)
+                            headers_[item_.Key] = item_.Value;
                     }
-                    finally
+
+                    var status_ = response_.StatusCode;
+                    if (status_ == HttpStatusCode.OK)
                     {
-                        if (response_ != null)
-                            response_.Dispose();
+                        var objectResponse_ = await ReadObjectResponseAsync<PlacesNearbySearchResponse>(response_, headers_).ConfigureAwait(false);
+                        return objectResponse_.Object;
                     }
+                    else
+                    if (status_ != HttpStatusCode.OK && status_ != HttpStatusCode.NoContent)
+                    {
+                        var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                    }
+
+                    return default(PlacesNearbySearchResponse);
                 }
-            }
-            finally
-            {
+                finally
+                {
+                    if (response_ != null)
+                        response_.Dispose();
+                }
             }
         }
 
@@ -231,42 +220,42 @@ namespace GoogleMapsServices.Client
 
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(_baseUrl != null ? _baseUrl.TrimEnd('/') : "").Append("/maps/api/place/textsearch/json?");
-            if (location != null)
+            if (string.IsNullOrEmpty(location))
             {
-                urlBuilder_.Append(Uri.EscapeDataString("location") + "=").Append(Uri.EscapeDataString(ConvertToString(location, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("location=").Append(location).Append("&");
             }
             if (maxPrice != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("maxPrice") + "=").Append(Uri.EscapeDataString(ConvertToString(maxPrice, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("maxprice=").Append(Uri.EscapeDataString(ConvertToString(maxPrice, CultureInfo.InvariantCulture))).Append("&");
             }
             if (minPrice != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("minprice") + "=").Append(Uri.EscapeDataString(ConvertToString(minPrice, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("minprice=").Append(Uri.EscapeDataString(ConvertToString(minPrice, CultureInfo.InvariantCulture))).Append("&");
             }
             if (openNow != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("opennow") + "=").Append(Uri.EscapeDataString(ConvertToString(openNow, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("opennow=").Append(Uri.EscapeDataString(ConvertToString(openNow, CultureInfo.InvariantCulture))).Append("&");
             }
-            if (pageToken != null)
+            if (string.IsNullOrEmpty(pageToken))
             {
-                urlBuilder_.Append(Uri.EscapeDataString("pagetoken") + "=").Append(Uri.EscapeDataString(ConvertToString(pageToken, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("pagetoken=").Append(pageToken).Append("&");
             }
-            urlBuilder_.Append(Uri.EscapeDataString("query") + "=").Append(Uri.EscapeDataString(ConvertToString(query, CultureInfo.InvariantCulture))).Append("&");
+            urlBuilder_.Append("query=").Append(query).Append("&");
             if (radius != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("radius") + "=").Append(Uri.EscapeDataString(ConvertToString(radius, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("radius=").Append(Uri.EscapeDataString(ConvertToString(radius, CultureInfo.InvariantCulture))).Append("&");
             }
-            if (type != null)
+            if (string.IsNullOrEmpty(type))
             {
-                urlBuilder_.Append(Uri.EscapeDataString("type") + "=").Append(Uri.EscapeDataString(ConvertToString(type, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("type=").Append(type).Append("&");
             }
             if (language != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("language") + "=").Append(Uri.EscapeDataString(ConvertToString(language, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("language=").Append(Uri.EscapeDataString(ConvertToString(language, CultureInfo.InvariantCulture))).Append("&");
             }
             if (region != null)
             {
-                urlBuilder_.Append(Uri.EscapeDataString("region") + "=").Append(Uri.EscapeDataString(ConvertToString(region, CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("region=").Append(Uri.EscapeDataString(ConvertToString(region, CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -275,13 +264,12 @@ namespace GoogleMapsServices.Client
             {
                 using (var request_ = new HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Method = HttpMethod.Get;
+                    
+                    request_.Headers.Accept.Add(_applicationJson);
 
-                    PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
 
                     var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
@@ -293,16 +281,14 @@ namespace GoogleMapsServices.Client
                                 headers_[item_.Key] = item_.Value;
                         }
 
-                        ProcessResponse(client_, response_);
-
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        var status_ = response_.StatusCode;
+                        if (status_ == HttpStatusCode.OK)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<PlacesTextSearchResponse>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ != "200" && status_ != "204")
+                        if (status_ != HttpStatusCode.OK && status_ != HttpStatusCode.NoContent)
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
@@ -320,21 +306,6 @@ namespace GoogleMapsServices.Client
             finally
             {
             }
-        }
-
-        private void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
-        {
-
-        }
-
-        private void PrepareRequest(HttpClient client, HttpRequestMessage request, System.Text.StringBuilder urlBuilder)
-        {
-
-        }
-
-        private void ProcessResponse(HttpClient client, HttpResponseMessage response)
-        {
-
         }
 
         private string ConvertToString(object value, CultureInfo cultureInfo)
@@ -360,10 +331,6 @@ namespace GoogleMapsServices.Client
             {
                 return Convert.ToString(value, cultureInfo).ToLowerInvariant();
             }
-            else if (value is byte[])
-            {
-                return Convert.ToBase64String((byte[])value);
-            }
             else if (value != null && value.GetType().IsArray)
             {
                 var array = Enumerable.OfType<object>((Array)value);
@@ -373,46 +340,27 @@ namespace GoogleMapsServices.Client
             return Convert.ToString(value, cultureInfo);
         }
 
-        protected virtual async Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(HttpResponseMessage response, IReadOnlyDictionary<string, IEnumerable<string>> headers)
+        protected async Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(HttpResponseMessage response, IReadOnlyDictionary<string, IEnumerable<string>> headers)
         {
             if (response == null || response.Content == null)
             {
                 return new ObjectResponseResult<T>(default(T), string.Empty);
             }
 
-            if (ReadResponseAsString)
+            try
             {
-                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                try
+                using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    var typedBody = _jsonSerialization.DeserializeFromSnakeCase<T>(responseText);
-                    return new ObjectResponseResult<T>(typedBody, responseText);
-                }
-                catch (JsonException exception)
-                {
-                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                    var typedBody = await _jsonSerialization.DeserializeFromSnakeCase<T>(responseStream);
+                    return new ObjectResponseResult<T>(typedBody, string.Empty);
                 }
             }
-            else
+            catch (JsonException exception)
             {
-                try
-                {
-                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    {
-                        var typedBody = await _jsonSerialization.DeserializeFromSnakeCase<T>(responseStream);
-                        return new ObjectResponseResult<T>(typedBody, string.Empty);
-                    }
-                }
-                catch (JsonException exception)
-                {
-                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
-                }
+                var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
+                throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
             }
         }
-
-        private bool ReadResponseAsString { get; set; }
 
         protected struct ObjectResponseResult<T>
         {
